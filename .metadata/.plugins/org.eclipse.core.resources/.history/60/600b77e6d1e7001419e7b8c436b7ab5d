@@ -1,0 +1,88 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class StartGame extends JPanel implements MouseListener{
+	JFrame frame = new JFrame("HERO?");
+	
+	BufferedImage backgroundImage;
+	
+	public void start(){
+		try {
+			backgroundImage = ImageIO.read(new File("menuArt.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		frame.setSize(601, 601);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.add(this);
+		
+		frame.validate();
+		frame.repaint();
+		
+		this.setLayout(null);
+		this.addMouseListener(this);
+	}
+	
+	int buttonWidth = 100;
+	int buttonHeight = 30;
+	Font font = new Font("Arial", Font.PLAIN, 20);
+	
+	public void paint(Graphics g){
+		g.drawImage(backgroundImage, 0, 0, null);
+		
+		g.setColor(Color.white);
+		g.fillRect(10, 10, 40, 15);
+		g.fillRect(300-(buttonWidth/2), 300-(buttonHeight/2)-buttonHeight-40, buttonWidth, buttonHeight);
+		
+		g.setColor(Color.black);
+		g.drawString("pause", 10, 22);
+		g.setFont(font);
+		g.drawString("START", 300-(buttonWidth/2)+17, 300-(buttonHeight/2)-40-8);
+	}
+	int startButtonX1 = 300-(buttonWidth/2);
+	int startButtonY1 = 300-(buttonHeight/2)-buttonHeight-40;
+	int startButtonX2 = 300-(buttonWidth/2)+buttonWidth;
+	int startButtonY2 = 300-(buttonHeight/2)-buttonHeight-40+buttonHeight;
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int mX = e.getX();
+		int mY = e.getY();
+		
+		System.out.println(mX + ", " + mY);
+		
+		if (mX > startButtonX1 && mX < startButtonX2 && mY > startButtonY1 && mY < startButtonY2) {
+			System.out.println("settingsButton1" + startButtonX1 + ", " + startButtonX2 + ", " + startButtonY1 + ", " +  startButtonY2);
+			
+		}
+		else if (mX > 10 && mX < 10 && mY > 50 && mY < 25) {
+			System.out.println("startgamePauseButton" + 10 + ", " + 10 + ", " + 50 + ", " +  25);
+			x.menuFrame.show();
+		}
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+}

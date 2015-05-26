@@ -1,0 +1,106 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class Settings extends JPanel implements MouseListener{
+	JFrame frame = new JFrame("HERO?");
+	
+	BufferedImage backgroundImage;
+	
+	public void start(){
+		try {
+			backgroundImage = ImageIO.read(new File("menuArt.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		frame.setSize(601, 601);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.add(this);
+		
+		frame.validate();
+		frame.repaint();
+		
+		this.setLayout(null);
+		this.addMouseListener(this);
+	}
+	
+	int buttonWidth = 100;
+	int buttonHeight = 30;
+	Font font = new Font("Arial", Font.PLAIN, 20);
+	
+	public void paint(Graphics g){
+		g.drawImage(backgroundImage, 0, 0, null);
+		
+		g.setColor(Color.white);
+		g.fillRect(10, 10, 25,25);
+		g.fillRect(300-(buttonWidth/2), 300-(buttonHeight/2)+buttonHeight, buttonWidth, buttonHeight);
+		g.fillRect(300-(buttonWidth/2), 300-(buttonHeight/2)-20, buttonWidth, buttonHeight);
+		g.fillRect(300-(buttonWidth/2), 300-(buttonHeight/2)-buttonHeight-40, buttonWidth, buttonHeight);
+		
+		g.setColor(Color.black);
+		g.setFont(font);
+		g.drawString("?", 15, 25);
+		g.drawString("START", 300-(buttonWidth/2)+17, 300-(buttonHeight/2)-40-8);
+		g.drawString("SETTINGS", 300-(buttonWidth/2)+1, 300-(buttonHeight/2)-20+22);
+		g.drawString("EXIT", 300-(buttonWidth/2)+29, 300-(buttonHeight/2)+buttonHeight+22);
+	}
+	int startButtonX1 = 300-(buttonWidth/2);
+	int startButtonY1 = 300-(buttonHeight/2)-buttonHeight-40;
+	int startButtonX2 = 300-(buttonWidth/2)+buttonWidth;
+	int startButtonY2 = 300-(buttonHeight/2)-buttonHeight-40+buttonHeight;
+	
+	int settingsButtonX1 = 300-(buttonWidth/2);
+	int settingsButtonY1 = 300-(buttonHeight/2)-20;
+	int settingsButtonX2 = 300-(buttonWidth/2)+buttonWidth;
+	int settingsButtonY2 = 300-(buttonHeight/2)-20+buttonHeight;
+	
+	int exitButtonX1 = 300-(buttonWidth/2);
+	int exitButtonY1 = 300-(buttonHeight/2)+buttonHeight;
+	int exitButtonX2 = 300-(buttonWidth/2)+buttonWidth;
+	int exitButtonY2 = 300-(buttonHeight/2)+buttonHeight+buttonHeight;
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int mX = e.getX();
+		int mY = e.getY();
+		
+		System.out.println(mX + ", " + mY);
+		
+		if (mX > startButtonX1 && mX < startButtonX2 && mY > startButtonY1 && mY < startButtonY2) {
+			System.out.println("startButton" + startButtonX1 + ", " + startButtonX2 + ", " + startButtonY1 + ", " +  startButtonY2);
+			
+		}
+		else if (mX > settingsButtonX1 && mX < settingsButtonX2 && mY > settingsButtonY1 && mY < settingsButtonY2) {
+			System.out.println("settingsButton" + settingsButtonX1 + ", " + settingsButtonX2 + ", " + settingsButtonY1 + ", " +  settingsButtonY2);
+			
+		}
+		else if (mX > exitButtonX1 && mX < exitButtonX2 && mY > exitButtonY1 && mY < exitButtonY2) {
+			System.out.println("exitButton" + exitButtonX1 + ", " + exitButtonX2 + ", " + exitButtonY1 + ", " +  exitButtonY2);
+			
+		}
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+}

@@ -1,0 +1,8 @@
+
+public class Runner {
+	Hero x;
+	public void main(String[] args) {
+		x = new Hero();
+		x.start();
+	}
+}

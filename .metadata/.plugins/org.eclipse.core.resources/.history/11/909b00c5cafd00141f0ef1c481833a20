@@ -1,0 +1,6 @@
+
+public class Help {
+	void setup(){
+		System.out.println();
+	}
+}

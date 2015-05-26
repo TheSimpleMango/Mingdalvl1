@@ -1,0 +1,4 @@
+public class Slider {
+	int SliderX;
+	int SliderY;
+}
